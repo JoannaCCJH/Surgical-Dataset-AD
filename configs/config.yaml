@@ -1,0 +1,16 @@
+# command: nohup python run_reconstruct.py > logs/run_reconstruct.log &
+# command: nohup python run_generate_labels.py > logs/run_generate_labels.log &
+################ Reconstruction ##############
+directory_dir: "/home/joanna/Desktop/data/anomaly_detection/val/P10_7566_8105" # The directory where the images are stored.
+output_dir: "./output" # The directory where the output will be saved.
+
+model_dir: "./checkpoints" # The directory where the model is stored.
+model: "model_all_with_tools.pth" # The model name.
+
+batch_size: 64 # The batch size for the dataloader.
+downsample: 1 # The downsample factor for the images. (1: no downsample, 2: downsample by 2, 4: downsample by 4, etc.)
+
+save_image: False # Save the reconstructed images.
+
+############### Compute Threshold ################
+kurtosis_threshold: 3   # The threshold for the kurtosis.

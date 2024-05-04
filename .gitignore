@@ -1,0 +1,11 @@
+# Ignore output folder
+/output/
+
+# Ignore __pycache__ directory
+__pycache__/
+
+# Ignore .vscode directory
+.vscode/
+
+# Ignore checkpoints
+checkpoints/
