@@ -56,11 +56,16 @@ Follow these steps to set up your environment:
 
 Follow these steps to run the anomaly detection:
 
-1. **Configuration**
+1. **Prepare the Checkpoints**
+
+   Start by creating a `checkpoints` directory. Download the checkpoint `model_all_with_tools.zip`(https://github.com/JoannaCCJH/Surgical-Dataset-AD/releases/tag/model) and save them in this directory.
+
+
+2. **Configuration**
 
    Begin by setting up the configuration file `configs/config.yaml`. Detailed instructions are provided within the file itself to guide you through this process.
 
-2. **Generate Reconstructed Images and Compute Metrics**
+3. **Generate Reconstructed Images and Compute Metrics**
 
    Run the following command to generate reconstructed images and compute metrics. The metrics result will be automatically saved. If you have set `save_image: True` in the configuration file, the reconstructed images will be saved in the `output/reconstructed_images/` directory:
 
@@ -68,7 +73,7 @@ Follow these steps to run the anomaly detection:
    python run_reconstruct.py
    ```
 
-3. Generate Labels
+4. **Generate Labels**
 
     Run the following command to generate labels for the images. The list of anomaly images will be saved in the `abnormal_images.txt` file under the `output/results directory`:
 
