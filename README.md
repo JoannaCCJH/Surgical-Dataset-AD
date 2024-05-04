@@ -57,6 +57,14 @@ Follow these steps to set up your environment:
 Follow these steps to run the anomaly detection:
 
 1. **Prepare the Checkpoints**
+   ```
+   ├── Surgical-Dataset-AD
+         ├── checkpoints
+            ├── model_all_with_tools.pth
+         ├── configs
+            ├── config.py
+         ├── ...
+   ```
 
    Start by creating a `checkpoints` directory. Download the checkpoint `model_all_with_tools.zip`(https://github.com/JoannaCCJH/Surgical-Dataset-AD/releases/tag/model) and save them in this directory.
 
