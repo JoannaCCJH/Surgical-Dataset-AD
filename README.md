@@ -52,18 +52,17 @@ Follow these steps to set up your environment:
 - `train.py`: This script contains the code for training the autoencoder model.
 - `requirements.txt`: This file lists the Python dependencies required to run the project.
 
-## 3. Steps
 ## 3. Execution Steps
 
 Follow these steps to run the anomaly detection:
 
-1. **Configure the Project**
+1. **Configuration**
 
-   Begin by setting up the configuration file. Detailed instructions are provided within the file itself to guide you through this process.
+   Begin by setting up the configuration file `configs/config.yaml`. Detailed instructions are provided within the file itself to guide you through this process.
 
 2. **Generate Reconstructed Images and Compute Metrics**
 
-   Run the following command to generate reconstructed images and compute metrics. If you have set `save_image: True` in the configuration file, the reconstructed images will be saved in the `output/reconstructed_images/` directory:
+   Run the following command to generate reconstructed images and compute metrics. The metrics result will be automatically saved. If you have set `save_image: True` in the configuration file, the reconstructed images will be saved in the `output/reconstructed_images/` directory:
 
    ```bash
    python run_reconstruct.py
@@ -80,3 +79,4 @@ Follow these steps to run the anomaly detection:
 ## 4. Training 
 
 - you can also train your own model using train.py
+

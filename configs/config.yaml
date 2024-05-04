@@ -13,4 +13,5 @@ downsample: 1 # The downsample factor for the images. (1: no downsample, 2: down
 save_image: False # Save the reconstructed images.
 
 ############### Compute Threshold ################
-kurtosis_threshold: 3   # The threshold for the kurtosis.
+use_kurtosis: True # Use the kurtosis to determine if the distribution is unimodal or not. If the distribution is unimodal, all images will be classified as normal.
+kurtosis_threshold: 0.5   # The threshold for the kurtosis. If you find the model misclassify the distribution as unimodal, you can lower this threshold

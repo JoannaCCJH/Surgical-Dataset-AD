@@ -105,34 +105,37 @@ if __name__ == "__main__":
         
         # For each specified metric column, filter the data by the computed threshold and sort it
         columns_to_plot = ['fsim_loss', 'psnr_loss', 'rmse_loss']
-        sort_order = {'fsim_loss': True, 'psnr_loss': False, 'rmse_loss': True}
+        sort_order = {'fsim_loss': True, 'psnr_loss': True, 'rmse_loss': False}
         sorted_losses_after_threshold = {}
         for column in columns_to_plot:
-            sorted_losses_after_threshold[column] = df[df[column] > threshold[column]].sort_values(by=column, ascending=sort_order[column])
-
+            if column == 'psnr_loss' or column == 'fsim_loss':
+                sorted_losses_after_threshold[column] = df[df[column] < threshold[column]].sort_values(by=column, ascending=sort_order[column])[column]
+            else:
+                sorted_losses_after_threshold[column] = df[df[column] >= threshold[column]].sort_values(by=column, ascending=sort_order[column])[column]
         # If none of the columns had a kurtosis above the threshold
-        if kurtosis_votes == 0:
+        if configs['use_kurtosis'] and kurtosis_votes == 0:
             print('Unimodal! All images are from one class!')
         else:
             # Otherwise, save the sorted losses to a file
             for loss_name, loss in sorted_losses_after_threshold.items():
+
                 index_with_loss = loss.index.astype(str) + ' ' + loss.astype(str)
                 with open(os.path.join(save_dir, f'{loss_name}_anomaly_sorted.txt'), 'w') as file:
                     for line in index_with_loss:
                         file.write(line + '\n')
                         
-        # Get the intersection of the indices (filenames) of 'fsim_loss' and 'psnr_loss'
-        common_filenames = set(sorted_losses_after_threshold['fsim_loss'].index).intersection(sorted_losses_after_threshold['psnr_loss'].index)
-        # Union the result with the indices (filenames) of 'rmse_loss'
-        common_filenames = common_filenames.union(sorted_losses_after_threshold['rmse_loss'].index)
-        
-        # Save the common filenames to a file
-        common_filenames = list(common_filenames)
-        common_filenames.sort()
-        output_file = "abnormal_images.txt"
-        with open(os.path.join(save_dir, output_file), "w") as f:
-            for image_name in common_filenames:
-                f.write(image_name + "\n")
+            # Get the intersection of the indices (filenames) of 'fsim_loss' and 'psnr_loss'
+            common_filenames = set(sorted_losses_after_threshold['fsim_loss'].index).intersection(sorted_losses_after_threshold['psnr_loss'].index)
+            # Get the intersection with the indices (filenames) of 'rmse_loss'
+            common_filenames = common_filenames.union(sorted_losses_after_threshold['rmse_loss'].index)
+            
+            # Save the common filenames to a file
+            common_filenames = list(common_filenames)
+            common_filenames.sort()
+            output_file = "abnormal_images.txt"
+            with open(os.path.join(save_dir, output_file), "w") as f:
+                for image_name in common_filenames:
+                    f.write(image_name + "\n")
 
 
 
